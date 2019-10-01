@@ -3,47 +3,7 @@
     "origin": [
       [
         "src/App.js",
-        35
-      ]
-    ]
-  },
-  "Nursing": {
-    "origin": [
-      [
-        "src/App.js",
-        40
-      ]
-    ]
-  },
-  "Diaper": {
-    "origin": [
-      [
-        "src/App.js",
-        45
-      ]
-    ]
-  },
-  "Sleep": {
-    "origin": [
-      [
-        "src/App.js",
-        50
-      ]
-    ]
-  },
-  "Food": {
-    "origin": [
-      [
-        "src/App.js",
-        55
-      ]
-    ]
-  },
-  "Measurement": {
-    "origin": [
-      [
-        "src/App.js",
-        60
+        19
       ]
     ]
   }
