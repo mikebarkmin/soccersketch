@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import { I18nProvider } from '@lingui/react';
 import theme from './theme';
 import GlobalStyle from './GlobalStyle';
+import Root from './components/Root';
 
 import dashboardIcon from './icons/dashboard.svg';
 
@@ -28,11 +29,13 @@ function App() {
     <I18nProvider language={locale} catalogs={catalogs}>
       <ThemeProvider theme={theme}>
         <HookedRouter>
-          <GlobalStyle />
-          <Navigation links={links} />
-          <Switch>
-            <Route exact path="/" component={DashboardPage} />
-          </Switch>
+          <Root>
+            <GlobalStyle />
+            <Navigation links={links} />
+            <Switch>
+              <Route exact path="/" component={DashboardPage} />
+            </Switch>
+          </Root>
         </HookedRouter>
       </ThemeProvider>
     </I18nProvider>

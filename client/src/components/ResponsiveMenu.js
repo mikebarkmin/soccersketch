@@ -12,7 +12,7 @@ const SmallMenu = styled.nav`
   right: 0;
   z-index: 99;
   text-align: center;
-  background: ${props => props.theme.secondary};
+  background: ${props => props.theme.primary};
   min-height: 52px;
 `;
 
@@ -24,7 +24,7 @@ const LargeMenu = styled.nav`
   z-index: 99;
   display: block;
   text-align: center;
-  background: ${props => props.theme.secondary};
+  background: ${props => props.theme.primary};
   height: 80px;
 
   transition: all 0.5s ease-in-out;

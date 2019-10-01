@@ -2,7 +2,7 @@ export default {
   primary: '#008000',
   primaryLight: '#00CC00',
   primaryDark: '#006600',
-  secondary: 'powerblue',
+  secondary: 'powderblue',
   neutral: 'grey',
   warning: 'orange',
   success: 'green',

@@ -1,0 +1,1 @@
+/* eslint-disable */export default{languageData:{"plurals":function(n,ord){if(ord)return n==1?"one":"other";return n>=0&&n<2?"one":"other"}},messages:{"Dashboard":"Dashboard","Logout":"Logout","Now":"Now"}};

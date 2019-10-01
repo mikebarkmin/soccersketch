@@ -44,11 +44,11 @@ const NavLink = styled(Link)`
   text-decoration: none;
 
   &.active {
-    background: ${props => darken(0.2, props.theme.secondary)};
+    background: ${props => props.theme.primaryDark};
   }
 
   &:hover {
-    background: ${props => darken(0.1, props.theme.secondary)};
+    background: ${props => props.theme.primaryDark};
   }
 `;
 

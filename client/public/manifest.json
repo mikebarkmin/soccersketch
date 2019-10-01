@@ -1,6 +1,6 @@
 {
-  "short_name": "Baby Tracker",
-  "name": "Track your baby and share it with your family",
+  "short_name": "SoccerSketch",
+  "name": "Create and manage your soccer drills",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#3cb371",
+  "theme_color": "#008000",
   "background_color": "#ffffff"
 }

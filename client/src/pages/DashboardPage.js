@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function DashboardPage() {
-  return <div></div>;
+  return <div>Hallo</div>;
 }
 
 DashboardPage.propTypes = {};
