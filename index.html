@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#333333"><title>SoccerSketch Pro</title>
+  <link rel="icon" href="logo_pro.png" type="image/png"><link rel="stylesheet" href="styles.css">
+  <script defer src="assets.js"></script><script defer src="project.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <span class="brand">SoccerSketch Pro</span>
+    <nav class="file-actions" aria-label="Projekt">
+      <button id="new-project"><span class="new-sign">+</span> Neu</button>
+      <details class="export-menu"><summary><span class="export-sign">&gt;</span> Export (JPG)</summary><div class="menu-panel">
+        <button data-export="jpeg">Export (JPG)</button><button data-export="png">Export (PNG)</button><button data-export="svg">Export (SVG)</button>
+        <button data-export="ssdf">Desktop-Datei (.ssdf)</button><button id="print-project">Drucken / PDF</button>
+      </div></details>
+      <button id="help-button" aria-label="Hilfe"><span id="help-icon"></span></button>
+    </nav>
+  </header>
+  <nav class="category-strip" aria-label="Spieler und Materialien"><div id="category-buttons"></div>
+    <button class="drawing-category" data-tool="draw" aria-label="Linien und Pfeile" title="Linien und Pfeile"><svg viewBox="0 0 70 60" aria-hidden="true"><path d="M10 52L58 9M50 10l10-3-2 11" fill="none" stroke="#000" stroke-width="2.5"/></svg></button>
+    <div id="team-colors" class="swatches" role="group" aria-label="Spielerfarbe"></div>
+  </nav>
+  <div class="workspace">
+    <main class="studio">
+      <div id="canvas-viewport" class="canvas-viewport"><div id="canvas-wrap" class="canvas-wrap">
+        <svg id="pitch-canvas" xmlns="http://www.w3.org/2000/svg" role="application" aria-label="Fußballübung. Symbol auswählen und auf dem Spielfeld platzieren. V: auswählen, T: Text, L: Linie." tabindex="0">
+          <defs><pattern id="editor-grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width=".8"/></pattern></defs>
+          <g id="pitch-background"></g><rect id="grid-overlay" width="100%" height="100%" fill="url(#editor-grid)" pointer-events="none" hidden/>
+          <g id="line-layer"></g><g id="object-layer"></g><g id="selection-layer"></g>
+        </svg>
+      </div></div>
+      <span id="tool-hint" class="tool-hint">Spieler auswählen und auf dem Spielfeld platzieren.</span>
+      <div class="canvas-navigation"><button id="undo" aria-label="Rückgängig" title="Strg+Z">↶</button><button id="redo" aria-label="Wiederholen" title="Strg+Umschalt+Z">↷</button><button data-tool="select" class="active" title="Auswählen (V)">↖</button></div>
+    </main>
+    <aside class="library" aria-label="Symbolauswahl">
+      <div id="asset-grid" class="asset-grid"></div>
+      <div id="path-palette" class="path-palette" hidden><div id="path-buttons"></div><div id="path-colors"></div><button id="delete-last-line">× Letzte Linie löschen</button></div>
+      <div id="palette-pages" class="palette-pages" aria-label="Seiten der Symbolauswahl"></div>
+      <section id="openpatch-ad" class="legacy-ad-space" aria-label="Openpatch-Projekte"></section>
+      <nav class="utility-actions" aria-label="Weitere Funktionen"><button id="open-project">Öffnen</button><button id="save-project">Speichern</button><button id="change-pitch">Spielfeld</button><button id="options-button" aria-label="Eigenschaften und Einstellungen">⚙</button></nav>
+      <span id="object-count" class="sr-only">0 Objekte</span>
+    </aside>
+  </div>
+  <dialog id="options-dialog">
+    <div class="dialog-heading"><h2>Projekt &amp; Einstellungen</h2><button data-close-dialog aria-label="Schließen">×</button></div>
+    <div class="options-layout"><section>
+      <label for="project-title">Name der Übung</label><input id="project-title" value="Untitled drill" maxlength="160"><span id="save-status">Bereit</span>
+      <label for="category">Sammlung</label><select id="category"><option value="Standing">Stehen</option><option value="Dribbling">Dribbling</option><option value="Passing">Passen</option><option value="Shooting">Schuss</option><option value="Tackling">Tackling</option><option value="Heading">Kopfball</option><option value="Back view">Rücken</option><option value="Goalkeepers">Torhüter</option><option value="Goals">Tore</option><option value="Equipment">Materialien</option><option value="Markers">Markierungen</option><option value="Indoor">Halle</option></select>
+      <label for="asset-search">Symbole suchen</label><input id="asset-search" type="search" placeholder="Suchen…"><span id="asset-count" class="sr-only"></span>
+      <label for="pitch-select">Spielfeld</label><select id="pitch-select"><option value="1">Trainingsfläche</option><option value="2">Halbes Spielfeld</option><option value="3">Strafraum</option><option value="4">Ganzes Spielfeld · quer</option><option value="5">Ganzes Spielfeld · hoch</option></select>
+      <div class="checkboxes"><label><input id="print-friendly" type="checkbox"> Weißes Spielfeld</label><label><input id="show-grid" type="checkbox"> Raster</label></div>
+      <div class="zoom-controls"><button id="zoom-out" aria-label="Verkleinern">−</button><output id="zoom-level">Fit</output><button id="zoom-in" aria-label="Vergrößern">+</button><button id="zoom-fit">Einpassen</button></div>
+      <div class="toolbar"><button data-tool="text">Text (T)</button><button data-tool="draw">Linie (L)</button><label class="sr-only" for="line-style">Linienart</label><select id="line-style">
+        <option value="arrow">Pfeil</option><option value="line">Linie</option><option value="double-arrow">Doppelpfeil</option><option value="dashed">Gestrichelt</option><option value="dashed-arrow">Gestrichelter Pfeil</option><option value="dashed-double-arrow">Gestrichelter Doppelpfeil</option><option value="double">Doppellinie</option><option value="double-line-arrow">Doppellinie mit Pfeil</option><option value="double-line-double-arrow">Doppellinie mit Doppelpfeil</option><option value="wavy">Dribbellinie</option><option value="wavy-arrow">Dribbelpfeil</option><option value="wavy-double-arrow">Dribbel-Doppelpfeil</option><option value="curve">Gebogener Pfeil</option><option value="dashed-curve">Gestrichelter Bogen</option><option value="rectangle">Rechteck</option><option value="triangle">Dreieck</option>
+      </select><label for="drawing-color">Linienfarbe</label><input type="color" id="drawing-color" value="#000000"></div>
+      <label for="drill-notes">Beschreibung der Übung</label><textarea id="drill-notes" rows="4" placeholder="Aufbau, Ablauf und Coachingpunkte…"></textarea>
+    </section><section class="inspector">
+      <div id="selection-empty"><h3>Kein Symbol ausgewählt</h3><p>Wähle einen Spieler, eine Linie oder ein Material auf dem Spielfeld aus, um die Eigenschaften zu ändern.</p><p>Die Ecken verändern die Größe. Der obere Griff dreht das Symbol. × löscht es, der untere rechte Knopf setzt Größe und Drehung zurück.</p></div>
+      <div id="selection-properties" hidden><div class="dialog-heading"><h3 id="selection-name">Auswahl</h3><button id="deselect" aria-label="Auswahl aufheben">×</button></div><div class="property-grid">
+        <label>X<input id="prop-x" type="number" step="1"></label><label>Y<input id="prop-y" type="number" step="1"></label><label>Breite<input id="prop-scale-x" type="number" min="-8" max="8" step=".05"></label><label>Höhe<input id="prop-scale-y" type="number" min="-8" max="8" step=".05"></label><label>Drehung<input id="prop-rotation" type="number" step="5"></label>
+      </div><div id="asset-color-control"><label for="prop-team-color">Spielerfarbe</label><select id="prop-team-color"><option value="0">Schwarz</option><option value="1">Orange</option><option value="2">Grün</option><option value="3">Blau</option><option value="4">Gelb</option><option value="5">Rot</option></select></div>
+      <div id="text-controls"><label for="prop-text">Text</label><textarea id="prop-text" rows="3"></textarea><label for="prop-font-size">Schriftgröße</label><input id="prop-font-size" type="number" min="8" max="160" value="26"></div><div id="object-color-control"><label for="prop-color">Farbe</label><input id="prop-color" type="color"></div>
+      <div class="selection-actions"><button id="duplicate-object">Duplizieren</button><button id="flip-object">Spiegeln</button><button id="bring-forward">Nach vorne</button><button id="send-backward">Nach hinten</button><button id="reset-object">Zurücksetzen</button><button id="delete-object">Löschen</button></div></div>
+      <p class="shortcuts"><kbd>V</kbd> Auswählen · <kbd>T</kbd> Text · <kbd>L</kbd> Linien<br><kbd>Umschalt + Klick</kbd> Mehrere auswählen<br><kbd>Strg A</kbd> Alle auswählen · <kbd>Strg D</kbd> Duplizieren<br><kbd>Strg C / V</kbd> Symbole kopieren / einfügen<br><kbd>Strg Z</kbd> Rückgängig · <kbd>Strg S</kbd> Speichern<br><kbd>Entf</kbd> Löschen · Rechtsklick: Schnellmenü</p>
+    </section></div><button data-close-dialog class="primary-button">schließen</button>
+  </dialog>
+  <dialog id="start-dialog" class="screen-dialog"><h2 class="sr-only">Spielfeld auswählen</h2><div id="pitch-choices" class="pitch-choices"></div><button id="begin-sketch" class="screen-close">Los Legen!</button></dialog>
+  <dialog id="help-dialog" class="screen-dialog help-dialog"><div id="help-diagram"></div><button data-close-dialog class="screen-close">schließen</button><p class="help-credit">SoccerSketch · Web-Version</p></dialog>
+  <dialog id="confirm-dialog"><h2>Neue Übung?</h2><p>Die aktuelle Übung wird ersetzt. Du kannst sie vorher mit „Speichern“ herunterladen.</p><div class="dialog-actions"><button id="cancel-new">Abbrechen</button><button id="confirm-new" class="primary-button">Neu</button></div></dialog>
+  <input id="file-input" type="file" accept=".json,.ssdf,.xml,application/json,text/xml" hidden><div id="toast" role="status" aria-live="polite" hidden></div>
+  <div id="context-menu" class="context-menu" role="menu" hidden><button role="menuitem" data-context-action="duplicate">Duplizieren <kbd>Strg D</kbd></button><button role="menuitem" data-context-action="front">Nach vorne</button><button role="menuitem" data-context-action="back">Nach hinten</button><button role="menuitem" data-context-action="reset">Größe &amp; Drehung zurücksetzen</button><button role="menuitem" data-context-action="properties">Eigenschaften…</button><button role="menuitem" data-context-action="delete">Löschen <kbd>Entf</kbd></button></div>
+  <script defer src="promos.js"></script>
+</body></html>
